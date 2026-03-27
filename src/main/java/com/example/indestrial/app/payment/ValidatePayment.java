@@ -2,17 +2,17 @@ package com.example.indestrial.app.payment;
 
 import jakarta.annotation.PostConstruct;
 
-public class RefundPayment implements PaymentStrategy {
+public class ValidatePayment implements PaymentStrategy {
 
   private final PaymentRegistry registry;
 
-  RefundPayment(PaymentRegistry registry) {
+  ValidatePayment(PaymentRegistry registry) {
     this.registry = registry;
   }
 
   @PostConstruct
   void register() {
-    registry.register(PaymentType.REFUND, this); // "this" = me, RefundPayment
+    registry.register(PaymentType.VALIDATE, this); // "this" = me, RefundPayment
   }
 
   @Override

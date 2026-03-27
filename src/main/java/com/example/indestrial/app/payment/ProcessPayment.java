@@ -11,7 +11,7 @@ public class ProcessPayment implements PaymentStrategy {
 
   @PostConstruct
   void register() {
-    registry.register("process", this); // "this" = me, ProcessPayment
+    registry.register(PaymentType.PROCESS, this); // "this" = me, ProcessPayment
   }
 
   @Override

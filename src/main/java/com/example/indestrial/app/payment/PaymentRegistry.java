@@ -5,13 +5,13 @@ import java.util.Map;
 
 class PaymentRegistry {
     
-  private final Map<String, PaymentStrategy> registry = new HashMap<>();
+  private final Map<PaymentType, PaymentStrategy> registry = new HashMap<>();
   
-  void register(String name, PaymentStrategy strategy) {
+  void register(PaymentType name, PaymentStrategy strategy) {
     registry.put(name, strategy);
   }
   
-  PaymentStrategy get(String name) {
+  PaymentStrategy get(PaymentType name) {
     if (!registry.containsKey(name)) {
       throw new IllegalArgumentException("Unknown strategy: " + name);
     }
