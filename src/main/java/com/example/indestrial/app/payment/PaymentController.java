@@ -10,16 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 public class PaymentController {
 
-  private final PaymentRegistry registry;
-
-  PaymentController(PaymentRegistry registry) {
-    this.registry = registry;
-  }
-
   @PostMapping("/payment")
   public void handle(@RequestBody PaymentRequest request) {
-    PaymentStrategy strategy = registry.get(request.type());
-    strategy.execute(request.order());
+    PaymentType type = PaymentType.valueOf(request.type());
+    type.getStrategy().execute(request.order());
   }
   
 }
