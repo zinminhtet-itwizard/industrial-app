@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 public class PaymentController {
 
-  private final PaymentFactory factory;
+  private final PaymentRegistry registry;
 
-  PaymentController(PaymentFactory factory) {
-    this.factory = factory;
+  PaymentController(PaymentRegistry registry) {
+    this.registry = registry;
   }
 
   @PostMapping("/payment")
   public void handle(@RequestBody PaymentRequest request) {
-    PaymentStrategy strategy = factory.create(request.type());
+    PaymentStrategy strategy = registry.get(request.type());
     strategy.execute(request.order());
   }
   
