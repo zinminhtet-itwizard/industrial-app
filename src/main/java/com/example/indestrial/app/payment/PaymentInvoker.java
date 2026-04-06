@@ -10,7 +10,7 @@ public class PaymentInvoker {
 
   private final Deque<CommandEntry> history = new ArrayDeque<>();
 
-  public void execute(PaymentCommand command, Order order) {
+  public void execute(PaymentCommand command, OrderData order) {
     command.execute(order);
     history.push(new CommandEntry(command, order));
   }
@@ -23,5 +23,5 @@ public class PaymentInvoker {
     entry.command().undo(entry.order());
   }
 
-  private record CommandEntry(PaymentCommand command, Order order) {}
+  private record CommandEntry(PaymentCommand command, OrderData order) {}
 }

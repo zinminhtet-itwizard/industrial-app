@@ -22,7 +22,7 @@ public class PaymentController {
   public void handle(@RequestBody PaymentRequest request) {
     PaymentType type = PaymentType.valueOf(request.type());
     PaymentCommand command = registry.getCommand(type);
-    invoker.execute(command, request.order());
+    invoker.execute(command, request.orderData());
   }
 
 }
