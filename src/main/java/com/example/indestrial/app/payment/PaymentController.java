@@ -10,10 +10,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 public class PaymentController {
 
+  private final PaymentCommandRegistry registry;
+  private final PaymentInvoker invoker;
+
+  public PaymentController(PaymentCommandRegistry registry, PaymentInvoker invoker) {
+    this.registry = registry;
+    this.invoker = invoker;
+  }
+
   @PostMapping("/payment")
   public void handle(@RequestBody PaymentRequest request) {
     PaymentType type = PaymentType.valueOf(request.type());
-    type.getStrategy().execute(request.order());
+    PaymentCommand command = registry.getCommand(type);
+    invoker.execute(command, request.order());
   }
-  
+
 }
