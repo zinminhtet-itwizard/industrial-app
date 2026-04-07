@@ -12,7 +12,4 @@ public class ProcessPaymentCommand implements PaymentCommand {
 
   @Override
   public void execute(OrderData order) {}
-
-  @Override
-  public void undo(OrderData order) {}
 }
